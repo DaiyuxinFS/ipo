@@ -58,7 +58,7 @@ export interface TierDetailResponse {
     tiers: TierDetailRow[];
 }
 
-const API_BASE = (import.meta.env.VITE_API_BASE_URL as string | undefined) || 'http://localhost:3000';
+const API_BASE = (import.meta.env.VITE_API_BASE_URL as string | undefined) || 'https://ipo-calculator-v2.zeabur.app';
 
 async function request<T>(path: string): Promise<T> {
     const res = await fetch(`${API_BASE}${path}`);

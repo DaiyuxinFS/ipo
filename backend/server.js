@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
+const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -19,6 +20,8 @@ const pool = new Pool({
 
 app.use(cors());
 app.use(express.json());
+const distPath = path.join(__dirname, '..', 'ipo-calculator', 'dist');
+app.use(express.static(distPath));
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
@@ -139,6 +142,10 @@ app.get('/api/tier-details/:stockCode', async (req, res, next) => {
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).json({ error: 'Internal server error' });
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(distPath, 'index.html'));
 });
 
 app.listen(port, () => {

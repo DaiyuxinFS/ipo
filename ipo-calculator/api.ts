@@ -58,7 +58,8 @@ export interface TierDetailResponse {
     tiers: TierDetailRow[];
 }
 
-const API_BASE = (import.meta.env.VITE_API_BASE_URL as string | undefined) || '';
+// 移除末尾斜杠，防止双斜杠问题
+const API_BASE = ((import.meta.env.VITE_API_BASE_URL as string | undefined) || '').replace(/\/$/, '');
 
 async function request<T>(path: string): Promise<T> {
     const res = await fetch(`${API_BASE}${path}`);

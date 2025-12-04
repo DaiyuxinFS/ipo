@@ -5,6 +5,8 @@
     "pg": "^8.16.3"
   },
   "scripts": {
-    "start": "node backend/server.js"
+    "start": "node backend/server.js",
+    "postinstall": "npm --prefix ipo-calculator install",
+    "build": "npm --prefix ipo-calculator run build"
   }
 }
